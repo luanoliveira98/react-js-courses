@@ -1,15 +1,29 @@
 import { format, formatDistanceToNow } from 'date-fns'
 
+import { useState } from 'react'
+
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }) {
+  const [comments, setComments] = useState([
+    1, 2,
+  ])
+
   const publishedDateFormatted = format(publishedAt, "LLLL do 'at' hh:mmbbb")
 
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
     addSuffix: true
   })
+
+  function handleCreateNewComment() {
+    event.preventDefault()
+
+    setComments([...comments, comments.length + 1])
+  }
+
+
   return (
     <article className={styles.post}>
       <header>
@@ -36,7 +50,7 @@ export function Post({ author, content, publishedAt }) {
         })}
       </div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Leave a feedback</strong>
 
         <textarea
@@ -49,9 +63,9 @@ export function Post({ author, content, publishedAt }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map(comment => {
+          return <Comment />
+        })}
       </div>
     </article>
   )
