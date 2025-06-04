@@ -20,54 +20,28 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="green">Completed</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="green">Completed</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="green">Completed</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="green">Completed</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="yellow">In progress</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task</td>
-              <td>20 minutes</td>
-              <td>2 months ago</td>
-              <td>
-                <Status statusColor="red">Interrupted</Status>
-              </td>
-            </tr>
+            {cycles.map(cycle => {
+              return (
+                <tr key={cycle.id}>
+                  <td>{cycle.task}</td>
+                  <td>{cycle.minutesAmount} minutes</td>
+                  <td>{cycle.startDate.toISOString()}</td>
+                  <td>
+                    {cycle.finishedDate && (
+                      <Status statusColor="green">Completed</Status>
+                    )}
+
+                    {cycle.interruptDate && (
+                      <Status statusColor="red">Interreputed</Status>
+                    )}
+
+                    {(!cycle.interruptDate && !cycle.finishedDate) && (
+                      <Status statusColor="yellow">In progress</Status>
+                    )}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </HistoryList>
