@@ -1,5 +1,4 @@
 import { ShoppingCart } from "phosphor-react";
-import type { Coffee } from "../CoffeeList";
 import {
   CoffeeActions,
   CoffeeBuy,
@@ -10,6 +9,15 @@ import {
   CoffeeTags,
 } from "./styles";
 import { IncrementInput } from "../../../../components/IncrementInput";
+
+interface Coffee {
+  id: number;
+  name: string;
+  description: string;
+  priceInCents: number;
+  tags: string[];
+  image: string;
+}
 
 interface CoffeeCardProps {
   coffee: Coffee;
