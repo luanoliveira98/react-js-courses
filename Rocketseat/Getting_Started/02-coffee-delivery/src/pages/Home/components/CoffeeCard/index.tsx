@@ -8,7 +8,7 @@ import {
   CoffeePrice,
   CoffeeTags,
 } from "./styles";
-import { IncrementInput } from "../../../../components/IncrementInput";
+import { IncrementInput } from "../../../../components/Form/IncrementInput";
 
 interface Coffee {
   id: number;

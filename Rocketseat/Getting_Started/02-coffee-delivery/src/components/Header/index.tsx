@@ -5,7 +5,7 @@ import logoCoffeeDelivery from "../../assets/logo-coffee-delivery.svg";
 import { HeaderContainer, HeaderNav } from "./styles";
 
 export function Header() {
-  const cart = [];
+  const cart = [1, 2, 3];
 
   return (
     <HeaderContainer>
