@@ -3,16 +3,22 @@ import { IncrementInputContainer } from "./styles";
 
 interface IncrementInputProps {
   quantity: number;
+  incrementQuantity: () => void;
+  decrementQuantity: () => void;
 }
 
-export function IncrementInput({ quantity }: IncrementInputProps) {
+export function IncrementInput({
+  quantity,
+  incrementQuantity,
+  decrementQuantity,
+}: IncrementInputProps) {
   return (
     <IncrementInputContainer>
-      <button>
+      <button onClick={decrementQuantity}>
         <Minus size={14} />
       </button>
       <span>{quantity}</span>
-      <button>
+      <button onClick={incrementQuantity}>
         <Plus size={14} />
       </button>
     </IncrementInputContainer>

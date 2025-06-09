@@ -10,76 +10,79 @@ import {
   CartCoffeeInfo,
   CheckoutButton,
 } from "./styles";
-
-interface Coffee {
-  id: number;
-  name: string;
-  quantity: number;
-  totalPriceInCents: number;
-  image: string;
-}
-
-export interface CartInfo {
-  coffees: Coffee[];
-  totalItemsInCents: number;
-  totalDeliveryInCents: number;
-  totalPriceInCents: number;
-}
+import { useContext } from "react";
+import { OrderContext } from "../../../../contexts/OrderContext";
 
 export function SelectedCoffees() {
-  const cart: CartInfo = {
-    coffees: [
-      {
-        id: 1,
-        name: "Expresso Tradicional",
-        totalPriceInCents: 990,
-        quantity: 1,
-        image: "/images/coffees/expresso.png",
-      },
-      {
-        id: 6,
-        name: "Latte",
-        totalPriceInCents: 1980,
-        quantity: 2,
-        image: "/images/coffees/latte.png",
-      },
-    ],
-    totalItemsInCents: 2970,
-    totalDeliveryInCents: 350,
-    totalPriceInCents: 3320,
-  };
+  const {
+    cart,
+    removeToCart,
+    incrementCoffeeQuantity,
+    decrementCoffeeQuantity,
+  } = useContext(OrderContext);
+
+  const {
+    coffees,
+    totalPriceInCents,
+    totalDeliveryInCents,
+    totalItemsInCents,
+  } = cart;
+
+  function handleRemoveToCart(coffeeId: number) {
+    removeToCart(coffeeId);
+  }
+
+  function handleIncrementCoffeeQuantity(coffeeId: number) {
+    incrementCoffeeQuantity(coffeeId);
+  }
+
+  function handleDecrementCoffeeQuantity(coffeeId: number) {
+    decrementCoffeeQuantity(coffeeId);
+  }
 
   return (
     <SelectedCoffeesContainer>
       <CardTitle>Cafés selecionados</CardTitle>
 
       <CartTotalCard>
-        {cart.coffees.map((coffee) => {
+        {coffees.map((coffeeCart) => {
           return (
-            <Fragment key={coffee.id}>
+            <Fragment key={coffeeCart.coffee.id}>
               <CartCoffee>
                 <div>
-                  <img src={coffee.image} alt={coffee.name} />
+                  <img
+                    src={coffeeCart.coffee.image}
+                    alt={coffeeCart.coffee.name}
+                  />
 
                   <div>
-                    <span>{coffee.name}</span>
+                    <span>{coffeeCart.coffee.name}</span>
                     <CartCoffeeInfo>
-                      <IncrementInput quantity={coffee.quantity} />
+                      <IncrementInput
+                        quantity={coffeeCart.quantity}
+                        incrementQuantity={() =>
+                          handleIncrementCoffeeQuantity(coffeeCart.coffee.id)
+                        }
+                        decrementQuantity={() =>
+                          handleDecrementCoffeeQuantity(coffeeCart.coffee.id)
+                        }
+                      />
 
-                      <button>
+                      <button
+                        onClick={() => handleRemoveToCart(coffeeCart.coffee.id)}
+                      >
                         <Trash size={16} />
-                        Remover
+                        <span>Remover</span>
                       </button>
                     </CartCoffeeInfo>
                   </div>
 
-                  <aside>
-                    R${" "}
-                    {(coffee.totalPriceInCents / 100)
-                      .toFixed(2)
-                      .toString()
-                      .replace(".", ",")}
-                  </aside>
+                  <strong>
+                    {new Intl.NumberFormat("pt-br", {
+                      currency: "BRL",
+                      style: "currency",
+                    }).format(coffeeCart.totalPriceInCents / 100)}
+                  </strong>
                 </div>
               </CartCoffee>
 
@@ -92,11 +95,10 @@ export function SelectedCoffees() {
             <span>Total de itens</span>
 
             <span>
-              R${" "}
-              {(cart.totalItemsInCents / 100)
-                .toFixed(2)
-                .toString()
-                .replace(".", ",")}
+              {new Intl.NumberFormat("pt-br", {
+                currency: "BRL",
+                style: "currency",
+              }).format(totalItemsInCents / 100)}
             </span>
           </div>
 
@@ -104,11 +106,10 @@ export function SelectedCoffees() {
             <span>Entrega</span>
 
             <span>
-              R${" "}
-              {(cart.totalDeliveryInCents / 100)
-                .toFixed(2)
-                .toString()
-                .replace(".", ",")}
+              {new Intl.NumberFormat("pt-br", {
+                currency: "BRL",
+                style: "currency",
+              }).format(totalDeliveryInCents / 100)}
             </span>
           </div>
 
@@ -116,11 +117,10 @@ export function SelectedCoffees() {
             <span>Total</span>
 
             <span>
-              R${" "}
-              {(cart.totalPriceInCents / 100)
-                .toFixed(2)
-                .toString()
-                .replace(".", ",")}
+              {new Intl.NumberFormat("pt-br", {
+                currency: "BRL",
+                style: "currency",
+              }).format(totalPriceInCents / 100)}
             </span>
           </div>
         </CartTotalInfo>

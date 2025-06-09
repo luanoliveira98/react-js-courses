@@ -38,8 +38,10 @@ export const CartCoffee = styled.div`
     }
 
     display: flex;
-    align-items: stretch;
+    justify-content: space-between;
     gap: 1.25rem;
+
+    width: 100%;
 
     > div {
       display: flex;
@@ -51,6 +53,7 @@ export const CartCoffee = styled.div`
 
 export const CartCoffeeInfo = styled.div`
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 
   > button {

@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 
 import logoCoffeeDelivery from "../../assets/logo-coffee-delivery.svg";
 import { HeaderContainer, HeaderNav } from "./styles";
+import { useContext } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
 
 export function Header() {
-  const cart = [1, 2, 3];
+  const { cart } = useContext(OrderContext);
+
+  const quantity = cart.coffees.reduce((accumulator, coffee) => {
+    return accumulator + coffee.quantity;
+  }, 0);
 
   return (
     <HeaderContainer>
@@ -19,9 +25,9 @@ export function Header() {
           <span>Porto Alegre, RS</span>
         </div>
 
-        <Link to={`cart`} aria-disabled={cart.length === 0}>
+        <Link to={`cart`} aria-disabled={quantity === 0}>
           <ShoppingCart size={22} weight="fill" />
-          {cart.length > 0 ? <span>{cart.length}</span> : null}
+          {quantity > 0 ? <span>{quantity}</span> : null}
         </Link>
       </HeaderNav>
     </HeaderContainer>
