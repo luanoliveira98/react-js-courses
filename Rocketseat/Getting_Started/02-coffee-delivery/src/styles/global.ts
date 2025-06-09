@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body, input, textarea, button {
     ${mixins.fonts.textM}
+    color: ${({ theme }) => theme.colors["base-text"]};
   }
 
   button {

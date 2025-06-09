@@ -1,3 +1,10 @@
+import { Intro } from "./components/Intro";
+import { HomeContainer } from "./styles";
+
 export function Home() {
-  return <h1>Coffee Delivery</h1>;
+  return (
+    <HomeContainer>
+      <Intro />
+    </HomeContainer>
+  );
 }
