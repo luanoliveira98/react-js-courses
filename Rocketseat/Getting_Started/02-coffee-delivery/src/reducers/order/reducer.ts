@@ -2,21 +2,31 @@ import { produce } from "immer";
 import {
   ActionTypes,
   type AddToCartAction,
+  type CheckoutAction,
   type DecrementCoffeeQuantityAction,
   type IncrementCoffeeQuantityAction,
   type RemoveToCartAction,
 } from "./actions";
 import type { Cart, CoffeeCart } from "../../interfaces/cart";
+import type { OrderInfo } from "../../pages/Cart";
+
+export enum PaymentMethodType {
+  CREDIT_CARD = "CREDIT_CARD",
+  DEBIT_CARD = "DEBIT_CARD",
+  MONEY = "MONEY",
+}
 
 interface OrderState {
   cart: Cart;
+  order: OrderInfo;
 }
 
 type Action =
   | AddToCartAction
   | RemoveToCartAction
   | IncrementCoffeeQuantityAction
-  | DecrementCoffeeQuantityAction;
+  | DecrementCoffeeQuantityAction
+  | CheckoutAction;
 
 export function orderReducer(state: OrderState, action: Action) {
   function coffeeIndexInCart(coffeeId: number) {
@@ -103,6 +113,15 @@ export function orderReducer(state: OrderState, action: Action) {
         calcTotalsCart(draft.cart);
       });
     }
+
+    case ActionTypes.CHECKOUT: {
+      return produce(state, (draft) => {
+        draft.order = action.payload.order;
+
+        action.payload.callback(`/waiting-delivery`);
+      });
+    }
+
     default:
       return state;
   }

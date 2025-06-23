@@ -2,19 +2,24 @@ import { createContext, useEffect, useReducer, type ReactNode } from "react";
 import { orderReducer } from "../reducers/order/reducer";
 import {
   addToCartAction,
+  checkoutAction,
   decrementCoffeeQuantityAction,
   incrementCoffeeQuantityAction,
   removeToCartAction,
   type CoffeeQuantityPayload,
 } from "../reducers/order/actions";
 import type { Cart } from "../interfaces/cart";
+import { useNavigate } from "react-router-dom";
+import type { NewOrderFormData } from "../pages/Cart";
 
 interface OrderContextType {
   cart: Cart;
+  order: NewOrderFormData;
   addToCart: (data: CoffeeQuantityPayload) => void;
   removeToCart: (coffeeId: number) => void;
   decrementCoffeeQuantity: (coffeeId: number) => void;
   incrementCoffeeQuantity: (coffeeId: number) => void;
+  checkout: (order: NewOrderFormData) => void;
 }
 
 export const OrderContext = createContext({} as OrderContextType);
@@ -23,6 +28,8 @@ interface OrderContextProviderProps {
   children: ReactNode;
 }
 
+const totalDeliveryInCents = 320;
+
 export function OrderContextProvider({ children }: OrderContextProviderProps) {
   const [orderState, dispatch] = useReducer(
     orderReducer,
@@ -30,9 +37,10 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
       cart: {
         coffees: [],
         totalItemsInCents: 0,
-        totalDeliveryInCents: 320,
+        totalDeliveryInCents,
         totalPriceInCents: 320,
       },
+      order: {},
     },
     (initialState) => {
       const storageStateAsJSON = localStorage.getItem(
@@ -47,7 +55,9 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     }
   );
 
-  const { cart } = orderState;
+  const { cart, order } = orderState;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const stateJSON = JSON.stringify(orderState);
@@ -71,14 +81,20 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     dispatch(decrementCoffeeQuantityAction(coffeeId));
   }
 
+  function checkout(order: NewOrderFormData) {
+    checkoutAction(order, navigate);
+  }
+
   return (
     <OrderContext.Provider
       value={{
         cart,
+        order,
         addToCart,
         removeToCart,
         incrementCoffeeQuantity,
         decrementCoffeeQuantity,
+        checkout,
       }}
     >
       {children}

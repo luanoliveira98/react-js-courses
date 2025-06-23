@@ -2,10 +2,6 @@ import styled from "styled-components";
 import { mixins } from "../../../../styles/mixins";
 
 export const CompleteYourOrderContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
   form {
     display: flex;
     flex-direction: column;

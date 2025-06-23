@@ -16,12 +16,32 @@ import {
   CartPaymentCard,
   PaymentOptions,
 } from "./styles";
+import { PaymentMethodType } from "../../../../reducers/order/reducer";
+import { useFormContext } from "react-hook-form";
+import type { NewOrderFormData } from "../..";
+import { useContext } from "react";
+import { OrderContext } from "../../../../contexts/OrderContext";
 
 export function CompleteYourOrder() {
+  const { checkout } = useContext(OrderContext);
+
+  const { register, watch, handleSubmit } = useFormContext<NewOrderFormData>();
+
+  const selectedPaymentMethod = watch("paymentMethod");
+
+  const handleCreateNewOrder = async (data: NewOrderFormData) => {
+    try {
+      checkout(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CompleteYourOrderContainer>
       <CardTitle>Complete seu pedido</CardTitle>
-      <form id="order">
+
+      <form action="" onSubmit={handleSubmit(handleCreateNewOrder)} id="order">
         <CartAddressCard>
           <CartCardHeader>
             <MapPinLine size={22} />
@@ -34,14 +54,17 @@ export function CompleteYourOrder() {
             <TextInput
               placeholder="CEP"
               containerProps={{ style: { gridArea: "zipcode" } }}
+              {...register("zipcode")}
             />
             <TextInput
               placeholder="Rua"
               containerProps={{ style: { gridArea: "street" } }}
+              {...register("street")}
             />
             <TextInput
               placeholder="Número"
               containerProps={{ style: { gridArea: "number" } }}
+              {...register("number")}
             />
             <TextInput
               placeholder="Complemento"
@@ -49,18 +72,22 @@ export function CompleteYourOrder() {
                 style: { gridArea: "additionalInformation" },
               }}
               optional
+              {...register("additionalInformation")}
             />
             <TextInput
               placeholder="Bairro"
               containerProps={{ style: { gridArea: "neighborhood" } }}
+              {...register("neighborhood")}
             />
             <TextInput
               placeholder="Cidade"
               containerProps={{ style: { gridArea: "city" } }}
+              {...register("city")}
             />
             <TextInput
               placeholder="UF"
               containerProps={{ style: { gridArea: "state" } }}
+              {...register("state")}
             />
           </CartAddressForm>
         </CartAddressCard>
@@ -75,15 +102,31 @@ export function CompleteYourOrder() {
             </div>
           </CartCardHeader>
           <PaymentOptions>
-            <RadioInput isSelected={true}>
+            <RadioInput
+              isSelected={
+                selectedPaymentMethod === PaymentMethodType.CREDIT_CARD
+              }
+              {...register("paymentMethod")}
+              value={PaymentMethodType.CREDIT_CARD}
+            >
               <CreditCard size={16} />
               <span>Cartão de Crédito</span>
             </RadioInput>
-            <RadioInput isSelected={false}>
+            <RadioInput
+              isSelected={
+                selectedPaymentMethod === PaymentMethodType.DEBIT_CARD
+              }
+              {...register("paymentMethod")}
+              value={PaymentMethodType.DEBIT_CARD}
+            >
               <Bank size={16} />
               <span>Cartão de Débito</span>
             </RadioInput>
-            <RadioInput isSelected={false}>
+            <RadioInput
+              isSelected={selectedPaymentMethod === PaymentMethodType.MONEY}
+              {...register("paymentMethod")}
+              value={PaymentMethodType.MONEY}
+            >
               <Money size={16} />
               <span>Dinheiro</span>
             </RadioInput>

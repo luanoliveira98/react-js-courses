@@ -9,11 +9,11 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <OrderContextProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <OrderContextProvider>
           <Router />
-        </BrowserRouter>
-      </OrderContextProvider>
+        </OrderContextProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

@@ -1,10 +1,14 @@
+import type { NavigateFunction } from "react-router-dom";
 import type { Coffee } from "../../interfaces/coffee";
+import type { OrderInfo } from "../../pages/Cart";
 
 export enum ActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
   REMOVE_TO_CART = "REMOVE_TO_CART",
   INCREMENT_COFFEE_QUANTITY = "INCREMENT_COFFEE_QUANTITY",
   DECREMENT_COFFEE_QUANTITY = "DECREMENT_COFFEE_QUANTITY",
+  CHANGE_PAYMENT_METHOD = "CHANGE_PAYMENT_METHOD",
+  CHECKOUT = "CHECKOUT",
 }
 
 export interface CoffeeQuantityPayload {
@@ -14,6 +18,11 @@ export interface CoffeeQuantityPayload {
 
 interface CoffeeIdPayload {
   coffeeId: number;
+}
+
+interface CheckoutPayload {
+  order: OrderInfo;
+  callback: NavigateFunction;
 }
 
 export interface AddToCartAction {
@@ -34,6 +43,11 @@ export interface IncrementCoffeeQuantityAction {
 export interface DecrementCoffeeQuantityAction {
   type: ActionTypes.DECREMENT_COFFEE_QUANTITY;
   payload: CoffeeIdPayload;
+}
+
+export interface CheckoutAction {
+  type: ActionTypes.CHECKOUT;
+  payload: CheckoutPayload;
 }
 
 export function addToCartAction({
@@ -76,6 +90,19 @@ export function decrementCoffeeQuantityAction(
     type: ActionTypes.DECREMENT_COFFEE_QUANTITY,
     payload: {
       coffeeId,
+    },
+  };
+}
+
+export function checkoutAction(
+  order: OrderInfo,
+  callback: NavigateFunction
+): CheckoutAction {
+  return {
+    type: ActionTypes.CHECKOUT,
+    payload: {
+      order,
+      callback,
     },
   };
 }

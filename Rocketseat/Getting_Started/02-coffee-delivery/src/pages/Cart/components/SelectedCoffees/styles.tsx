@@ -125,7 +125,12 @@ export const CheckoutButton = styled.button`
 
   transition: all 0.2s;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
     background-color: ${({ theme }) => theme.colors["yellow-dark"]};
   }
 `;

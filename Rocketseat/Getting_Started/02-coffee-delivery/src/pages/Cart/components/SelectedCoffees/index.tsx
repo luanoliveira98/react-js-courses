@@ -12,10 +12,13 @@ import {
 } from "./styles";
 import { useContext } from "react";
 import { OrderContext } from "../../../../contexts/OrderContext";
+import { useFormContext } from "react-hook-form";
+import type { NewOrderFormData } from "../..";
 
 export function SelectedCoffees() {
   const {
     cart,
+    checkout,
     removeToCart,
     incrementCoffeeQuantity,
     decrementCoffeeQuantity,
@@ -28,6 +31,8 @@ export function SelectedCoffees() {
     totalItemsInCents,
   } = cart;
 
+  const { handleSubmit } = useFormContext<NewOrderFormData>();
+
   function handleRemoveToCart(coffeeId: number) {
     removeToCart(coffeeId);
   }
@@ -39,6 +44,25 @@ export function SelectedCoffees() {
   function handleDecrementCoffeeQuantity(coffeeId: number) {
     decrementCoffeeQuantity(coffeeId);
   }
+
+  const handleCreateNewOrder = async (data: NewOrderFormData) => {
+    try {
+      checkout(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleSubmitButtonClick() {
+    try {
+      console.log("vai");
+      handleSubmit(handleCreateNewOrder);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const isSubmitDisabled = cart.coffees.length === 0;
 
   return (
     <SelectedCoffeesContainer>
@@ -125,7 +149,12 @@ export function SelectedCoffees() {
           </div>
         </CartTotalInfo>
 
-        <CheckoutButton type="submit" form="order">
+        <CheckoutButton
+          onClick={handleSubmitButtonClick}
+          disabled={isSubmitDisabled}
+          form="order"
+          type="submit"
+        >
           Confirmar Pedido
         </CheckoutButton>
       </CartTotalCard>
