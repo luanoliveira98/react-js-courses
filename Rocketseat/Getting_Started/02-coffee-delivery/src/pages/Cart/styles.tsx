@@ -6,4 +6,9 @@ export const CartContainer = styled.main`
 
   padding-top: 2.5rem;
   margin: 0 auto;
+
+  form {
+    display: flex;
+    gap: 0.75rem;
+  }
 `;

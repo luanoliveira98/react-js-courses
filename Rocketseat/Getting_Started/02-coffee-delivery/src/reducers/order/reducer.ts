@@ -16,6 +16,12 @@ export enum PaymentMethodType {
   MONEY = "MONEY",
 }
 
+export enum PaymentMethodPrintableType {
+  CREDIT_CARD = "Cartão de Crédito",
+  DEBIT_CARD = "Cartão de Débito",
+  MONEY = "Dinheiro",
+}
+
 interface OrderState {
   cart: Cart;
   order: NewOrderFormData;
@@ -117,6 +123,12 @@ export function orderReducer(state: OrderState, action: Action) {
     case ActionTypes.CHECKOUT: {
       return produce(state, (draft) => {
         draft.order = action.payload.order;
+        draft.cart = {
+          coffees: [],
+          totalItemsInCents: 0,
+          totalDeliveryInCents: draft.cart.totalDeliveryInCents,
+          totalPriceInCents: 0,
+        };
 
         action.payload.callback(`/waiting-delivery`);
       });

@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { mixins } from "../../../../styles/mixins";
 
 export const CompleteYourOrderContainer = styled.section`
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 `;
 
 export const CardTitle = styled.span`

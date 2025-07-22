@@ -11,44 +11,24 @@ import {
   WaitingDeliveryTitle,
 } from "./styles";
 import deliveryIllustration from "../../assets/delivery-illustration.png";
-
-interface Address {
-  street: string;
-  number: number;
-  additionalInformation?: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-}
+import { OrderContext } from "../../contexts/OrderContext";
+import { useContext } from "react";
+import { PaymentMethodPrintableType } from "../../reducers/order/reducer";
 
 interface DeliveryForecast {
   min: number;
   max: number;
 }
 
-interface DeliveryOrder {
-  address: Address;
-  deliveryForecast: DeliveryForecast;
-  paymentMethod: string;
-}
-
 export function WaitingDelivery() {
-  const deliveryOrder: DeliveryOrder = {
-    address: {
-      street: "Rua João Daniel Martinelli",
-      number: 102,
-      neighborhood: "Farrapos",
-      city: "Porto Alegre",
-      state: "RS",
-    },
-    deliveryForecast: {
-      min: 20,
-      max: 30,
-    },
-    paymentMethod: "Cartão de Crédito",
+  const { order } = useContext(OrderContext);
+
+  const deliveryForecast: DeliveryForecast = {
+    min: 20,
+    max: 30,
   };
 
-  const { address, deliveryForecast, paymentMethod } = deliveryOrder;
+  const paymentMethod = PaymentMethodPrintableType[order.paymentMethod];
 
   return (
     <WaitingDeliveryContainer>
@@ -68,15 +48,15 @@ export function WaitingDelivery() {
                 <span>
                   Entrega em{" "}
                   <strong>
-                    {address.street}, {address.number}{" "}
-                    {address.additionalInformation
-                      ? ` - ${address.additionalInformation}`
+                    {order.street}, {order.number}{" "}
+                    {order.additionalInformation
+                      ? ` - ${order.additionalInformation}`
                       : null}
                   </strong>{" "}
                 </span>
 
                 <span>
-                  {address.neighborhood} - {address.city}, {address.state}
+                  {order.neighborhood} - {order.city}, {order.state}
                 </span>
               </div>
             </WaitingDeliveryItemLocal>

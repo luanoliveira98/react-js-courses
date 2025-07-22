@@ -6,6 +6,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
+import { PaymentMethodType } from "../../reducers/order/reducer";
 
 const newOrderFormValidationSchema = z.object({
   zipcode: z.string().min(1, "CEP é obrigatório"),
@@ -15,7 +16,11 @@ const newOrderFormValidationSchema = z.object({
   neighborhood: z.string().min(1, "Bairro é obrigatório"),
   city: z.string().min(1, "Cidade é obrigatória"),
   state: z.string().min(1, "Estado é obrigatório"),
-  paymentMethod: z.string().min(1, "Método de pagamento é obrigatório"),
+  paymentMethod: z.enum([
+    PaymentMethodType.CREDIT_CARD,
+    PaymentMethodType.DEBIT_CARD,
+    PaymentMethodType.MONEY,
+  ]),
 });
 
 export type NewOrderFormData = z.infer<typeof newOrderFormValidationSchema>;
@@ -33,7 +38,7 @@ export function Cart() {
       neighborhood: "",
       city: "",
       state: "",
-      paymentMethod: "",
+      paymentMethod: PaymentMethodType.CREDIT_CARD,
     },
   });
 
