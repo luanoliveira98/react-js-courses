@@ -8,7 +8,7 @@ import {
   type RemoveToCartAction,
 } from "./actions";
 import type { Cart, CoffeeCart } from "../../interfaces/cart";
-import type { OrderInfo } from "../../pages/Cart";
+import type { NewOrderFormData } from "../../pages/Cart";
 
 export enum PaymentMethodType {
   CREDIT_CARD = "CREDIT_CARD",
@@ -18,7 +18,7 @@ export enum PaymentMethodType {
 
 interface OrderState {
   cart: Cart;
-  order: OrderInfo;
+  order: NewOrderFormData;
 }
 
 type Action =

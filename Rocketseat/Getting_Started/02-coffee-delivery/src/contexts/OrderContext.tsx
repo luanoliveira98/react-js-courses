@@ -82,7 +82,7 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
   }
 
   function checkout(order: NewOrderFormData) {
-    checkoutAction(order, navigate);
+    dispatch(checkoutAction(order, navigate));
   }
 
   return (

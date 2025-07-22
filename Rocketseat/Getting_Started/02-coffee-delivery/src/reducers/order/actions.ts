@@ -1,6 +1,6 @@
 import type { NavigateFunction } from "react-router-dom";
 import type { Coffee } from "../../interfaces/coffee";
-import type { OrderInfo } from "../../pages/Cart";
+import type { NewOrderFormData } from "../../pages/Cart";
 
 export enum ActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
@@ -21,7 +21,7 @@ interface CoffeeIdPayload {
 }
 
 interface CheckoutPayload {
-  order: OrderInfo;
+  order: NewOrderFormData;
   callback: NavigateFunction;
 }
 
@@ -95,7 +95,7 @@ export function decrementCoffeeQuantityAction(
 }
 
 export function checkoutAction(
-  order: OrderInfo,
+  order: NewOrderFormData,
   callback: NavigateFunction
 ): CheckoutAction {
   return {
