@@ -19,8 +19,14 @@
 
         return (
           <>
-            <p>Contador: {counter}</p>
-            <button onClick={() => setCounter(10)}>Atualizar</button>
+            <p>Counter: {counter}</p>
+            <button onClick={() => setCounter(10)}>Update</button>
+            <button onClick={() => setCounter((prevState) => prevState + 1)}>
+              Increment
+            </button>
+            <button onClick={() => setCounter((prevState) => prevState - 1)}>
+              Decrement
+            </button>
           </>
         );
       }
