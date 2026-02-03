@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rocketseat - React.js - Fundamentos</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Counter() {
+        const [counter, setCounter] = React.useState(0);
+
+        if (counter > 20) {
+          return <p>Greater than 20</p>;
+        }
+
+        return (
+          <>
+            <p>Counter: {counter}</p>
+
+            <p>
+              {counter > 10 ? "Greater than to 10" : "Less than or equal 10"}
+            </p>
+
+            {counter > 15 && <p>Greater than 15</p>}
+
+            <button onClick={() => setCounter(10)}>Update</button>
+            <button onClick={() => setCounter((prevState) => prevState + 1)}>
+              Increment
+            </button>
+            <button onClick={() => setCounter((prevState) => prevState - 1)}>
+              Decrement
+            </button>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <main>
+            <Counter />
+          </main>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
