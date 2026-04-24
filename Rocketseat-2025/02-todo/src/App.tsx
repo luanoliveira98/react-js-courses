@@ -1,5 +1,11 @@
+import Text from "./components/text";
+
 function App() {
-  return <div className="text-pink-dark">Hello World!</div>;
+  return (
+    <Text variant="body-md-bold" className="text-pink-dark">
+      Hello World!
+    </Text>
+  );
 }
 
 export default App;
