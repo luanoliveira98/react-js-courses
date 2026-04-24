@@ -8,7 +8,7 @@ interface TextProps extends VariantProps<typeof textVariants> {
   children?: React.ReactNode;
 }
 
-function Text({
+export default function Text({
   as = "span",
   className,
   variant,
@@ -24,5 +24,3 @@ function Text({
     children,
   );
 }
-
-export default Text;
