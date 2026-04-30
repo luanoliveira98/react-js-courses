@@ -16,7 +16,7 @@
     "react-dom": "^19.2.5",
     "react-router": "^7.14.2",
     "tailwindcss": "^4.2.4",
-    "use-local-storage": "^3.0.0"
+    "use-local-storage-state": "^19.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

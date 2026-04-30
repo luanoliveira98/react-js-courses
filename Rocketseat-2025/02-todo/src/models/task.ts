@@ -1,6 +1,9 @@
 export const TASKS_KEY = "tasks";
 
-export type TaskState = "creating" | "created";
+export enum TaskState {
+  Creating = "creating",
+  Created = "created",
+}
 
 export interface Task {
   id: string;
