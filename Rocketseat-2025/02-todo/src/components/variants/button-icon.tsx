@@ -14,13 +14,17 @@ export const buttonIconVariants = cva(
         sm: "w-6 h-6 p-1 rounded",
       },
       disabled: {
-        true: "cursor-events-none opacity-50",
+        true: "pointer-events-none opacity-50",
+      },
+      handling: {
+        true: "pointer-events-none",
       },
     },
     defaultVariants: {
       variant: "primary",
       size: "sm",
       disabled: false,
+      handling: false,
     },
   },
 );

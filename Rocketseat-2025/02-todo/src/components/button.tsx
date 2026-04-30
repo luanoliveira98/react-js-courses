@@ -7,12 +7,14 @@ import {
   buttonVariants,
 } from "./variants/button";
 import Text from "./text";
+import SpinnerIcon from "../assets/icons/spinner.svg?react";
 
 interface ButtonProps
   extends
     Omit<React.ComponentProps<"button">, "size" | "disabled">,
     VariantProps<typeof buttonVariants> {
   icon?: React.ComponentProps<typeof Icon>["svg"];
+  handling?: boolean;
 }
 
 export default function Button({
@@ -21,17 +23,25 @@ export default function Button({
   size,
   disabled,
   className,
-  icon: IconComponent,
+  icon,
+  handling,
   ...props
 }: ButtonProps) {
   return (
     <button
-      className={buttonVariants({ variant, size, disabled, className })}
+      className={buttonVariants({
+        variant,
+        size,
+        disabled,
+        handling,
+        className,
+      })}
       {...props}
     >
-      {IconComponent && (
+      {icon && (
         <Icon
-          svg={IconComponent}
+          svg={handling ? SpinnerIcon : icon}
+          animate={handling}
           className={buttonIconVariants({ variant, size })}
         />
       )}
