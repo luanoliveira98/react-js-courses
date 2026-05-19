@@ -43,9 +43,7 @@ export const buttonTextVariants = cva("", {
 interface ButtonProps
   extends
     Omit<React.ComponentProps<"button">, "size" | "disabled">,
-    VariantProps<typeof buttonVariants> {
-  loading?: boolean;
-}
+    VariantProps<typeof buttonVariants> {}
 
 export default function Button({
   children,

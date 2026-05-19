@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type React from "react";
 import Icon from "./icon";
-import Skeleton from "./skeleton";
 
 export const buttonIconVariants = cva(
   "inline-flex items-center justify-center cursor-pointer transition group",
@@ -43,8 +42,6 @@ interface ButtonIconProps
     Omit<React.ComponentProps<"button">, "size">,
     VariantProps<typeof buttonIconVariants> {
   icon: React.ComponentProps<typeof Icon>["svg"];
-  loading?: boolean;
-  handling?: boolean;
 }
 
 export default function ButtonIcon({
@@ -52,18 +49,8 @@ export default function ButtonIcon({
   size,
   className,
   icon,
-  loading,
   ...props
 }: ButtonIconProps) {
-  if (loading) {
-    return (
-      <Skeleton
-        rounded="sm"
-        className={buttonIconVariants({ variant: "none", size, className })}
-      />
-    );
-  }
-
   return (
     <button
       className={buttonIconVariants({ variant, size, className })}
