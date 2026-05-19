@@ -65,7 +65,7 @@ export default function Button({
       })}
       {...props}
     >
-      <Title variant="sm" className={buttonTextVariants({ variant })}>
+      <Title size="sm" className={buttonTextVariants({ variant })}>
         {children}
       </Title>
     </button>

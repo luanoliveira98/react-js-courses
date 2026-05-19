@@ -1,16 +1,16 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
-export const titleVariants = cva("font-sans text-gray-100 font-bold", {
+export const titleVariants = cva("font-sans font-bold", {
   variants: {
-    variant: {
-      sm: "text-sm leading-5",
-      md: "text-base leading-6",
-      lg: "text-2xl leading-6",
+    size: {
+      sm: "text-sm leading-5 text-gray-300",
+      md: "text-base leading-6 text-gray-200",
+      lg: "text-2xl leading-6 text-gray-100",
     },
   },
   defaultVariants: {
-    variant: "md",
+    size: "md",
   },
 });
 
@@ -23,14 +23,14 @@ interface TitleProps extends VariantProps<typeof titleVariants> {
 export default function Title({
   as = "h1",
   className,
-  variant,
+  size,
   children,
   ...props
 }: TitleProps) {
   return React.createElement(
     as,
     {
-      className: titleVariants({ variant, className }),
+      className: titleVariants({ size, className }),
       ...props,
     },
     children,

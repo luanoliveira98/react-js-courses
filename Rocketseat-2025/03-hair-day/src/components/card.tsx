@@ -4,7 +4,6 @@ import React from "react";
 const cardVariants = cva("rounded-xl bg-gray-700", {
   variants: {
     size: {
-      none: "",
       md: "p-20",
     },
   },
