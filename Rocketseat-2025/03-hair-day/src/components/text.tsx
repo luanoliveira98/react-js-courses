@@ -1,15 +1,18 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
-export const textVariants = cva("font-sans font-normal", {
+export const textVariants = cva("font-sans font-bold", {
   variants: {
-    size: {
-      sm: "text-sm leading-5 text-gray-300",
-      md: "text-base leading-6 text-gray-200",
+    variant: {
+      "title-sm": "text-sm leading-5 text-gray-300 font-bold",
+      "title-md": "text-base leading-6 text-gray-200 font-bold",
+      "title-lg": "text-2xl leading-6 text-gray-100 font-bold",
+      "body-sm": "text-sm leading-5 text-gray-300 font-normal",
+      "body-md": "text-base leading-6 text-gray-200 font-normal",
     },
   },
   defaultVariants: {
-    size: "md",
+    variant: "body-md",
   },
 });
 
@@ -20,16 +23,16 @@ interface TextProps extends VariantProps<typeof textVariants> {
 }
 
 export default function Text({
-  as = "span",
+  as = "h1",
   className,
-  size,
+  variant,
   children,
   ...props
 }: TextProps) {
   return React.createElement(
     as,
     {
-      className: textVariants({ size, className }),
+      className: textVariants({ variant, className }),
       ...props,
     },
     children,

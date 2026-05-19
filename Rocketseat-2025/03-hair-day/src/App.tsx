@@ -1,11 +1,13 @@
-import Header from "./core-components/header";
-import ScheduleForm from "./core-components/schedule-form";
+import AppName from "./core-components/AppName";
+import Schedule from "./core-components/Schedule";
+import Agenda from "./core-components/Agenda";
 
 function App() {
   return (
-    <main className="p-3 gap-3">
-      <Header />
-      <ScheduleForm />
+    <main className="flex pt-3 gap-3">
+      <AppName />
+      <Schedule />
+      <Agenda />
     </main>
   );
 }

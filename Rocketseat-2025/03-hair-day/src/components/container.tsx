@@ -1,10 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
-export const containerVariants = cva("mx-auto", {
+const containerVariants = cva("flex flex-col w-full", {
   variants: {
     size: {
-      md: "max-w-[31.5rem] px-2",
+      md: "p-20",
     },
   },
   defaultVariants: {
@@ -19,9 +19,9 @@ interface ContainerProps
 
 export default function Container({
   as = "div",
+  size,
   children,
   className,
-  size,
   ...props
 }: ContainerProps) {
   return React.createElement(

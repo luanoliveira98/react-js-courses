@@ -4,7 +4,7 @@ import type React from "react";
 export const iconVariants = cva("", {
   variants: {
     size: {
-      md: "w-4 h-4",
+      md: "w-5 h-5",
     },
   },
   defaultVariants: {

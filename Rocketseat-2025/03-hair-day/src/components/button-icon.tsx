@@ -28,7 +28,7 @@ export const buttonIconIconVariants = cva("transition", {
       primary: "fill-yellow group-hover:fill-yellow-dark",
     },
     size: {
-      md: "w-8 h-8",
+      md: "w-4 h-4",
     },
   },
   defaultVariants: {

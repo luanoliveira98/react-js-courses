@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type React from "react";
-import Title from "./title";
+import Text from "./text";
 
 export const buttonVariants = cva(
   "flex items-center justify-center cursor-pointer transition rounded-lg group gap-2",
@@ -65,9 +65,9 @@ export default function Button({
       })}
       {...props}
     >
-      <Title size="sm" className={buttonTextVariants({ variant })}>
+      <Text variant="title-sm" className={buttonTextVariants({ variant })}>
         {children}
-      </Title>
+      </Text>
     </button>
   );
 }
