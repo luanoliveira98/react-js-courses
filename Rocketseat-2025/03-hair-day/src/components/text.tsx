@@ -4,12 +4,12 @@ import React from "react";
 export const textVariants = cva("font-sans text-gray-200 font-normal", {
   variants: {
     variant: {
-      sm: "text-sm leading-5",
-      md: "text-base leading-6",
+      "body-sm": "text-sm leading-5",
+      "body-md": "text-base leading-6",
     },
   },
   defaultVariants: {
-    variant: "md",
+    variant: "body-md",
   },
 });
 

@@ -1,4 +1,4 @@
-@import 'taildwindcss';
+@import 'tailwindcss';
 
 @theme {
   --color-*: initial;

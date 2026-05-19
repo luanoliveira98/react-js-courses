@@ -1,12 +1,12 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
-export const titleVariants = cva("font-sans font-bold", {
+export const titleVariants = cva("font-sans text-gray-100 font-bold", {
   variants: {
     variant: {
       sm: "text-sm leading-5",
       md: "text-base leading-6",
-      lg: "text-lg leading-8",
+      lg: "text-2xl leading-6",
     },
   },
   defaultVariants: {
