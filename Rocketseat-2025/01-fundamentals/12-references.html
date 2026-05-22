@@ -36,10 +36,63 @@
         );
       }
 
+      function ScrollTracker() {
+        const containerRef = React.useRef(null);
+        const [scrollInfo, setScrollInfo] = React.useState({
+          scrollTop: 0,
+          scrollHeight: 0,
+          clientHeight: 0,
+        });
+        const [scrollPercentage, setScrollPercentage] = React.useState(0);
+
+        function handleContainerScroll() {
+          if (!containerRef.current) {
+            return;
+          }
+
+          const { scrollTop, scrollHeight, clientHeight } =
+            containerRef.current;
+
+          setScrollInfo({ scrollTop, scrollHeight, clientHeight });
+
+          const maxScrollTop = scrollHeight - clientHeight;
+          const percentage = Math.round((scrollTop / maxScrollTop) * 100);
+
+          setScrollPercentage(percentage);
+        }
+
+        return (
+          <div class="space-y-4">
+            <div
+              class="border boder-solid border-blue-500 p-4 h-60 overflow-y-auto"
+              ref={containerRef}
+              onScroll={handleContainerScroll}
+            >
+              <div className="space-y-4">
+                {Array.from({ length: 20 }, (_, index) => (
+                  <p key={index}>Item {index + 1}</p>
+                ))}
+              </div>
+            </div>
+
+            <ul class="space-y-2 list-disc pl-5">
+              <li>Scroll progress: {scrollPercentage}%</li>
+              <li>Where is the scroll (scrollTop): {scrollInfo.scrollTop}</li>
+              <li>Scroll height: {scrollInfo.scrollHeight}</li>
+              <li>Container height: {scrollInfo.clientHeight}</li>
+            </ul>
+          </div>
+        );
+      }
+
       function App() {
         return (
           <main className="p-3 space-y-6">
             <InputFocus />
+
+            <hr />
+
+            <ScrollTracker />
           </main>
         );
       }
