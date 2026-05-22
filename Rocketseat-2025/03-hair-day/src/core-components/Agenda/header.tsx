@@ -1,7 +1,15 @@
 import SelectInputDate from "../../components/select-input-date";
 import Text from "../../components/text";
 
-export default function AgendaHeader() {
+interface AgendaHeaderProps {
+  date: string;
+  handleSelectedDate: (date: string) => void;
+}
+
+export default function AgendaHeader({
+  date,
+  handleSelectedDate,
+}: AgendaHeaderProps) {
   return (
     <div className="flex flex-wrap gap-3 justify-between">
       <div className="flex flex-col gap-1">
@@ -10,7 +18,10 @@ export default function AgendaHeader() {
           Consulte os seus cortes de cabelo agendados por dia
         </Text>
       </div>
-      <SelectInputDate />
+      <SelectInputDate
+        value={date}
+        onChange={(e) => handleSelectedDate(e.target.value)}
+      />
     </div>
   );
 }
