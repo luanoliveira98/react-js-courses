@@ -7,6 +7,19 @@
     {
       "id": "est",
       "name": "Estefâne"
+    },
+    {
+      "id": "RMDPzEIqD6Q",
+      "name": "antonio"
+    },
+    {
+      "id": "rv-W8YmLBmc",
+      "name": "antonio"
+    },
+    {
+      "id": "IayUivC5fV0",
+      "name": "estrela"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
