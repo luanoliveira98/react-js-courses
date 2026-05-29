@@ -5,12 +5,22 @@ import ChevronRightIcon from "./assets/icons/chevron-right.svg?react";
 import Badge from "./components/badge";
 import Alert from "./components/alert";
 import Divider from "./components/divider";
+import Text from "./components/text";
 import InputText from "./components/input-text";
 import SearchIcon from "./assets/icons/search.svg?react";
 import InputCheckbox from "./components/input-checkbox";
 import InputSingleFile from "./components/input-single-file";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/image-file-preview";
+import { Dialog } from "@radix-ui/react-dialog";
+import {
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "./components/dialog";
 
 export default function App() {
   const form = useForm();
@@ -75,6 +85,35 @@ export default function App() {
           maxFileSizeInMB={50}
           replaceBy={<ImageFilePreview src={fileSource} alt="Image" />}
         />
+      </div>
+
+      <div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Open Modal</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>Text dialog</DialogHeader>
+            <DialogBody>
+              <Text as="div" className="mb-4">
+                Test dialog content
+              </Text>
+              <InputSingleFile
+                form={form}
+                {...form.register("file")}
+                allowedExtensions={["png", "jpg", "jpeg", "webp"]}
+                maxFileSizeInMB={50}
+                replaceBy={<ImageFilePreview src={fileSource} alt="Image" />}
+              />
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Cancel</Button>
+              </DialogClose>
+              <Button>Add</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
