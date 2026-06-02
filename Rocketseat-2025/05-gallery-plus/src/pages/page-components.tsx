@@ -11,7 +11,7 @@ import SearchIcon from "../assets/icons/search.svg?react";
 import InputCheckbox from "../components/input-checkbox";
 import InputSingleFile from "../components/input-single-file";
 import { useForm } from "react-hook-form";
-import ImageFilePreview from "../components/image-file-preview";
+import ImagePreview from "../components/image-preview";
 import { Dialog } from "@radix-ui/react-dialog";
 import {
   DialogBody,
@@ -83,7 +83,7 @@ export default function PageComponents() {
           {...form.register("file")}
           allowedExtensions={["png", "jpg", "jpeg", "webp"]}
           maxFileSizeInMB={50}
-          replaceBy={<ImageFilePreview src={fileSource} alt="Image" />}
+          replaceBy={<ImagePreview src={fileSource} alt="Image" />}
         />
       </div>
 
@@ -103,7 +103,7 @@ export default function PageComponents() {
                 {...form.register("file")}
                 allowedExtensions={["png", "jpg", "jpeg", "webp"]}
                 maxFileSizeInMB={50}
-                replaceBy={<ImageFilePreview src={fileSource} alt="Image" />}
+                replaceBy={<ImagePreview src={fileSource} alt="Image" />}
               />
             </DialogBody>
             <DialogFooter>
