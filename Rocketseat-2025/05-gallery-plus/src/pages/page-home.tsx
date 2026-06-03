@@ -1,50 +1,35 @@
 import Container from "../components/container";
-import PhotoWidget from "../contexts/photos/components/photo-widget";
-import type { Photo } from "../contexts/photos/models/photo";
+import PhotosList from "../contexts/photos/components/photos-list";
 
 export default function PageHome() {
   return (
-    <Container className="grid grid-cols-4 gap-9">
-      <PhotoWidget
-        photo={{
-          id: "1",
-          title: "Sample Photo",
-          imageId: "portrait-tower.png",
-          albums: [
-            { id: "1", title: "Sample Album" },
-            { id: "2", title: "Sample Album 2" },
-            { id: "3", title: "Sample Album 3" },
-            { id: "4", title: "Sample Album 4" },
-          ],
-        }}
+    <Container>
+      <PhotosList
+        photos={[
+          {
+            id: "1",
+            title: "Sample Photo",
+            imageId: "portrait-tower.png",
+            albums: [
+              { id: "1", title: "Sample Album" },
+              { id: "2", title: "Sample Album 2" },
+              { id: "3", title: "Sample Album 3" },
+              { id: "4", title: "Sample Album 4" },
+            ],
+          },
+          {
+            id: "2",
+            title: "Sample Photo",
+            imageId: "portrait-tower.png",
+            albums: [
+              { id: "1", title: "Sample Album" },
+              { id: "2", title: "Sample Album 2" },
+              { id: "3", title: "Sample Album 3" },
+              { id: "4", title: "Sample Album 4" },
+            ],
+          },
+        ]}
       />
-      <PhotoWidget
-        photo={{
-          id: "1",
-          title: "Sample Photo",
-          imageId: "portrait-tower.png",
-          albums: [
-            { id: "1", title: "Sample Album" },
-            { id: "2", title: "Sample Album 2" },
-            { id: "3", title: "Sample Album 3" },
-            { id: "4", title: "Sample Album 4" },
-          ],
-        }}
-      />
-      <PhotoWidget
-        photo={{
-          id: "1",
-          title: "Sample Photo",
-          imageId: "portrait-tower.png",
-          albums: [
-            { id: "1", title: "Sample Album" },
-            { id: "2", title: "Sample Album 2" },
-            { id: "3", title: "Sample Album 3" },
-            { id: "4", title: "Sample Album 4" },
-          ],
-        }}
-      />
-      <PhotoWidget photo={{} as Photo} loading />
     </Container>
   );
 }

@@ -13,15 +13,15 @@ interface PhotoWidgetProps {
 
 export default function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       {!loading ? (
         <ImagePreview
           src={`/images/${photo.imageId}`}
           title={photo.title}
-          imageClassName="w-[13.5625rem] h-[13.5625rem] rounded-lg"
+          imageClassName="w-[10.875rem] h-[10.875rem] rounded-lg"
         />
       ) : (
-        <Skeleton className="w-[13.5625rem] h-[13.5625rem] rounded-lg" />
+        <Skeleton className="w-[10.875rem] h-[10.875rem] rounded-lg" />
       )}
 
       <div className="flex flex-col gap-2">
@@ -62,12 +62,12 @@ export default function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
             variant: "secondary",
             className: "px-2 py-2",
           })}
-          to={`/photos/${photo.id}`}
+          to={`/fotos/${photo.id}`}
         >
           <Text
             className={buttonTextVariants({ variant: "secondary", size: "sm" })}
           >
-            Image Details
+            Detalhes da imagem
           </Text>
         </Link>
       ) : (
